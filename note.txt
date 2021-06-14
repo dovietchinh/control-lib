@@ -1,0 +1,6 @@
+scipy.linalg.
+phan tich tinh on dinh
+    Gerschgorin : dieu kien du
+    Hurwidth
+    Lyapunove: PA + A.T@P xasc dinh am
+    
