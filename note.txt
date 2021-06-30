@@ -4,3 +4,5 @@ phan tich tinh on dinh
     Hurwidth
     Lyapunove: PA + A.T@P xasc dinh am
     
+phan tich tinh quan sat duoc:
+
