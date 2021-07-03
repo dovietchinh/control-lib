@@ -5,7 +5,8 @@ from scipy import linalg
 import scipy.linalg
 
 class BIBO(ABC):
-    """[summary]
+    """[summary]:
+        Abstract class for stability algorithms
     """
     @abstractmethod
     def conclusion(self):
