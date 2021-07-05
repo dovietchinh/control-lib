@@ -130,3 +130,5 @@ dmypy.json
 *.ipynb
 draft.py
 .vscode
+*.png
+logs

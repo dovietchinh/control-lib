@@ -120,7 +120,7 @@ class LinearSystem():
         if algorimth=='lyapunov':
             P = kwagrs.get('P')
             Q = kwagrs.get('Q')
-            std = bibo.Lyapunov(A=self._A, p=P, q=Q)
+            std = bibo.Lyapunov(A=self._A, P=P, Q=Q)
             result = std.conclusion()
             print(LinearSystem.bibo_result[result])     
             return result
@@ -194,7 +194,9 @@ class LinearSystem():
 
     def simulink(self,time_start=0, time_stop=10, time_step=0.1,file_png ='similink'):
         assert self._x0 is not None, "please set initial state x0"
-        assert self._u is not None, "please set input before running simulink"
+        #assert self._u is not None, "please set input before running simulink"
+        if self._u is None:
+            self._u = lambda t: np.zeros((self._inputs_shape,1))
         x0 = self._x0
         def function_x (t,x):
             out = self._A @ x.reshape(-1,1) + self._B @ (self._u(t).reshape(-1,1))
@@ -258,8 +260,8 @@ class LinearSystem():
                 
         a = np.concatenate(a,axis=1)
         t = np.concatenate(t,axis=1)
-        print(t)
-        print(a)
+        #print(t)
+        #print(a)
         R = - t @ np.linalg.inv(a)
         return R
         

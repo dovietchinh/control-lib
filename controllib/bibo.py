@@ -48,7 +48,7 @@ class Lyapunov(BIBO):
         assert (P is None) ^ (Q is None), "please fill either P or Q"
         self. P = P
         self. Q = Q
-        if P:
+        if P is not None:
             assert P.shape == A.shape, "Invalid shape of matrix P"
         else:
             assert Q.shape == A.shape, "Invalid shape of matrix Q"
@@ -59,12 +59,14 @@ class Lyapunov(BIBO):
         return  condition1 and condition2
 
     def conclusion(self):
-        if self.P:
+        if self.P is not None:
             Q = -(self.P @ self.A + self.A.T @ self. P)
+            print(f'Q={Q}')
             result = Lyapunov.is_definite_positive_matrix(Q)
             
         else:
             P = linalg.solve_sylvester(a=self.A.T, b=self.A, q=-self.Q)
+            print(f'P={P}')
             result = Lyapunov.is_definite_positive_matrix(M=P)
         if result: 
             return 1
