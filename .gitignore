@@ -132,3 +132,4 @@ draft.py
 .vscode
 *.png
 logs
+docs/_build/

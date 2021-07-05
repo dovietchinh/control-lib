@@ -25,19 +25,7 @@ class LinearSystem():
     }
 
     def __init__(self,**kwargs):
-        """[Init the system]:
-        Params:
-            A,B,C,D: [np.array] System matrix
-            x0: [np.array] Initial state of system
-            u : [function] The input signal of system, function respect to time
-        Return: 
-            LinearSystem instance
-        
-        Raise error:
-            - matrix A and B is't provided
-            - 
-
-        
+        """[summary]
         """
         
         assert "A" in kwargs, "matrix A must be provided"
@@ -102,7 +90,7 @@ class LinearSystem():
         """[summary]
 
         Returns:
-            list: [the shape of states, inputs and outputs respectively]
+            list: [description]
         """
         return self.states_shape, self.inputs_shape, self.outputs_shape
 
@@ -133,7 +121,14 @@ class LinearSystem():
   
         
     def is_controlable(self,algorimth='kalman', **kwagrs) -> bool:
-        """[this function implemented based on kalman theorem]
+        """[summary]
+
+        Args:
+            algorimth (str, optional): [description]. Defaults to 'kalman'.
+
+        Raises:
+            ValueError: [description]
+
         Returns:
             bool: [description]
         """
@@ -233,6 +228,18 @@ class LinearSystem():
         pass
         
     def state_feed_back(self,pole,algorithms='Roppernecker', **kwargs):
+        """[summary]
+
+        Args:
+            pole ([type]): [description]
+            algorithms (str, optional): [description]. Defaults to 'Roppernecker'.
+
+        Raises:
+            ValueError: [description]
+
+        Returns:
+            [type]: [description]
+        """
         controlability = self.is_controlable()
         if not controlability:
             print('system is not controlalbe')
@@ -267,6 +274,18 @@ class LinearSystem():
         
 
     def apply_state_feedback(self,R,time_start=0, time_stop=10, time_step=0.1,save_fig='apply_state_feedback'):
+        """[summary]
+
+        Args:
+            R ([type]): [description]
+            time_start (int, optional): [description]. Defaults to 0.
+            time_stop (int, optional): [description]. Defaults to 10.
+            time_step (float, optional): [description]. Defaults to 0.1.
+            save_fig (str, optional): [description]. Defaults to 'apply_state_feedback'.
+
+        Returns:
+            [type]: [description]
+        """
         A_old = self._A 
         self._A = self._A - self._B@R
         out =  self.simulink(time_start=time_start, time_stop=time_stop, time_step=time_step,file_png=save_fig)
